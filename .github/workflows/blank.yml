@@ -35,10 +35,9 @@ jobs:
           git clone https://github.com/LineageOS/android_kernel_huawei_kiwi/ -b cm-14.1-20170502 --depth=1
           git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b cm-14.1
           chmod 0770 ./android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/
-          cp kiwi-64_defconfig android_kernel_huawei_kiwi/arch/arm64/configs
-          PATH=$PATH:./android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/
+          cp kiwi-64_defconfig android_kernel_huawei_kiwi/arch/arm64/configs/
           cd android_kernel_huawei_kiwi
-          make ARCH=arm64 CROSS_COMPILE=aarch64-linux-android- CC=aarch64-linux-android-gcc kiwi-64_defconfig
-          make ARCH=arm64 CROSS_COMPILE=aarch64-linux-android- CC=aarch64-linux-android-gcc -j64
+          make ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc kiwi-64_defconfig
+          make ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc -j64
           
           
