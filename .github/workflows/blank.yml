@@ -37,13 +37,20 @@ jobs:
           chmod 0770 ./android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/
           cp kiwi-64_defconfig android_kernel_huawei_kiwi/arch/arm64/configs/
           mkdir out
+          mkdir modules
           cd android_kernel_huawei_kiwi
           make O=../out ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc kiwi-64_defconfig
-          make O=../out ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc -j64
+          make O=../out ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc -j64 Image modules dtbs
+          make O=../out ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc INSTALL_MOD_PATH=../modules modules_install
           
       - name: Store generated kernel file
         uses: actions/upload-artifact@v1
         with:
           name: kernel
           path: ./out/arch/arm64/boot
-          
+
+      - name: Store generated kernel modules file
+        uses: actions/upload-artifact@v1
+        with:
+          name: modules
+          path: ./modules
