@@ -36,8 +36,14 @@ jobs:
           git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.1
           chmod 0770 ./android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/
           cp kiwi-64_defconfig android_kernel_huawei_kiwi/arch/arm64/configs/
+          mkdir out
           cd android_kernel_huawei_kiwi
-          make ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc kiwi-64_defconfig
-          make ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc -j64
+          make O=../out ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc kiwi-64_defconfig
+          make O=../out ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc -j64
           
+      - name: Store generated kernel file
+        uses: actions/upload-artifact@v1
+        with:
+          name: kernel
+          path: ./out
           
