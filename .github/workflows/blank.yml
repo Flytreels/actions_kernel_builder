@@ -32,7 +32,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Clone KernelCode and Download ToolChain to build kernel
         run: |
-          git clone https://github.com/cuteland/android_kernel_huawei_kiwi/ -b lineage-15.1 --depth=1
+          git clone https://github.com/cuteland/android_kernel_huawei_kiwi/ -b lineage-16.0 --depth=1
           git clone https://github.com/cuteland/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.1 --depth=1
           chmod 0770 ./android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/
           cp kiwi-64_defconfig android_kernel_huawei_kiwi/arch/arm64/configs/
