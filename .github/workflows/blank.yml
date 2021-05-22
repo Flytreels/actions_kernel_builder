@@ -33,7 +33,7 @@ jobs:
       - name: Clone KernelCode and Download ToolChain to build kernel
         run: |
           git clone https://github.com/LineageOS/android_kernel_huawei_kiwi/ -b cm-14.1-20170502 --depth=1
-          git clone https://github.com/cuteland/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-14.1 --depth=1
+          git clone https://github.com/cuteland/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.11 --depth=1
           chmod 0770 ./android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/
           cp kiwi2 android_kernel_huawei_kiwi/arch/arm64/configs/
           mkdir out
