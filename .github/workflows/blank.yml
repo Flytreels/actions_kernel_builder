@@ -32,15 +32,15 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Clone KernelCode and Download ToolChain to build kernel
         run: |
-          git clone https://github.com/honor5Xjimdo/android_kernel_huawei_kiwi/ -b cm-14.1-20170502 --depth=1
+          git clone https://github.com/LineageOS/android_kernel_huawei_kiwi/ -b cm-14.1-20170502 --depth=1
           git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.1 --depth=1
           chmod 0770 ./android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/
-          cp kiwi-64_defconfig android_kernel_huawei_kiwi/arch/arm64/configs/
-          #curl https://raw.githubusercontent.com/honor5xjimdo/android_kernel_huawei_kiwi/lineage-16.0/arch/arm64/configs/kiwi-64_halium >android_kernel_huawei_kiwi/arch/arm64/configs/kiwi-64_defconfig
+          #cp kiwi-64_defconfig android_kernel_huawei_kiwi/arch/arm64/configs/
+          curl https://raw.githubusercontent.com/honor5xjimdo/android_kernel_huawei_kiwi/lineage-17.1/arch/arm64/configs/kiwi-64_defconfig >android_kernel_huawei_kiwi/arch/arm64/configs/kiwi-64_defconfig
           mkdir out
           cd android_kernel_huawei_kiwi
           make O=../out ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc kiwi-64_defconfig
-          make O=../out ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc -j128
+          make O=../out ARCH=arm64 CROSS_COMPILE=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android- CC=../android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc -j8
       - name: Store generated kernel file
         uses: actions/upload-artifact@v1
         with:
